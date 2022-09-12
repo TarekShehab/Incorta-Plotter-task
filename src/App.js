@@ -1,11 +1,12 @@
-import './App.css';
+import './App.css'
+import ColumnsContainer from './ColumnsContainer.js'
 
 function App() {
   return (
     <div className="App">
-      Incorta Graph
+      <ColumnsContainer />
     </div>
   );
 }
 
-export default App;
+export default App
