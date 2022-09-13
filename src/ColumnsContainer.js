@@ -9,34 +9,17 @@ class ColumnsContainer extends Component {
 
     getColumns = async () => {
         await API.getAll()
-            .then(res => {
-                console.log(res)
-                return this.setState({columns: res})
-            })
-    }
-
-    getData = async (dimension, measures) => {
-        const data = 
-        {
-            "dimension": dimension,
-            "measures": measures
-        }
-        await API.getData(data)
-            .then(res => {
-                console.log(res)
-                return res
-            })
+            .then(res => this.setState({columns: res}) )
     }
 
     componentDidMount = () => {
-
         this.getColumns()
         // this.getData("Product", ["Cost"])
     }
 
     render(){
         return (
-            <div className="columns">
+            <div className="col1">
                 <h2>Columns</h2>
 
                 <h3>Dimensions:</h3>
