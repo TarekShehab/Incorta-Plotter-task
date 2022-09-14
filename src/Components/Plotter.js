@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import * as API from './API.js'
+import * as API from '../API.js'
 
 const data = [
     {
@@ -103,7 +103,7 @@ class Plotter extends Component {
                     bottom: 5,
                     }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid strokeDasharray="3 3" horizontal="true" vertical="" />
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />

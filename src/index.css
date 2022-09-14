@@ -55,9 +55,24 @@ body {
 .plotter{
   width: 80%;
   background-color: aliceblue;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-left: 2rem;
   border-style: groove;
   size: initial;
   text-align: center;
+}
+
+.picker{
+  width: 80%;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  /* text-align: end; */
+}
+
+.picker input{
+  background-color: aliceblue;
+  border-style: groove;
+  width: 80%;
+  margin-bottom: .5rem;
+  margin-right: .5rem;
 }

@@ -1,14 +1,16 @@
-import React from 'react';
+import React from 'react'
 import './App.css'
-import ColumnsContainer from './ColumnsContainer.js'
-import Plotter from './Plotter';
+import ColumnsContainer from './Components/ColumnsContainer.js'
+import Plotter from './Components/Plotter.js'
+import Picker from './Components/Picker.js'
+// import List from './Components/List.js'
 
 function App() {
   return (
       <div className='row-flex'>
         <ColumnsContainer />
         <div className='col2 col-flex'>
-          {/* imported dimension/measures */}
+          <Picker />
           <Plotter />
         </div>
       </div>
