@@ -41,9 +41,14 @@ function DroppableZone({type}) {
         })
     })) 
 
+    const showDrag = () =>{
+        console.log(isOver)
+    }
+
     const addcolumnTag = name => {
         const tagsList = columns.filter(col => col.name === name)
         setBoard(board => [...board, tagsList[0]])
+        showDrag()
         console.log(`droppable zone of type: ${type} has a list: ${dropBoard}`)
 
     }
