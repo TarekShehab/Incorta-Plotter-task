@@ -24,7 +24,7 @@ body {
   flex: 1;
   justify-content: center;
   background-color: aliceblue;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-left: 2rem;
   border-style: groove;
 }
@@ -62,17 +62,42 @@ body {
   text-align: center;
 }
 
-.picker{
-  width: 80%;
-  margin-top: 2rem;
-  margin-left: 2rem;
-  /* text-align: end; */
-}
+/* .picker{
+  display: flex;
+  flex-direction: column;
+} */
 
-.picker input{
+.picker div{
   background-color: aliceblue;
   border-style: groove;
   width: 80%;
-  margin-bottom: .5rem;
-  margin-right: .5rem;
+  height: 2rem;
+  margin: 1rem 0rem 0rem 2rem;
+  /* text-align: end;; */
+  display: flex;
+  flex-direction: row;
 }
+
+.picker p{
+  text-align: right;
+  margin-top: 5px;
+  padding-right: 10px;
+}
+
+.picker button{
+  background-color: aliceblue;
+  margin: 0rem .5rem .5rem 2rem;
+}
+
+/*
+.draggable{
+  text-align: center;
+}
+
+ .droppable{
+  background-color: aliceblue;
+  border-style: groove;
+  width: 60%;
+  height: 2rem;
+  margin: 2rem .5rem .5rem 2rem;
+} */
