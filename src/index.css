@@ -34,7 +34,7 @@ body {
 }
 
 .col1 h3{
-  padding-left: .5em;
+  /* padding-left: .5em; */
   margin-bottom: 0;
 }
 
@@ -44,8 +44,8 @@ body {
   padding-left: 1em;  
 }
 
-.col ul li{
-  padding-left: 5rem;
+.col1 li{
+  margin-left: .5rem;
 }
 
 .col2{
@@ -67,26 +67,30 @@ body {
   flex-direction: column;
 } */
 
-.picker div{
+.drop div{
   background-color: aliceblue;
   border-style: groove;
   width: 80%;
   height: 2rem;
-  margin: 1rem 0rem 0rem 2rem;
+  margin-left: 2rem;
   /* text-align: end;; */
   display: flex;
   flex-direction: row;
 }
 
-.picker p{
-  text-align: right;
-  margin-top: 5px;
-  padding-right: 10px;
+.drop p{
+  margin: 1rem 0rem 0rem 2rem;
+  /* text-align: right; */
+  /* margin-top: 5px; */
+  /* padding-right: 10px; */
 }
 
-.picker button{
+.drop button{
   background-color: aliceblue;
   margin: 0rem .5rem .5rem 2rem;
+  /* text-align: right; */
+  /* position: fixed;
+  justify-content: right; */
 }
 
 /*

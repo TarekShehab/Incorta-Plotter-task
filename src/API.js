@@ -10,6 +10,9 @@ const header = {
 export const getAll = () =>
     fetch(`${api}/columns`)
         .then(res =>  res.json())
+        .catch(error => {
+            console.log("Error fetching columns from API: ", error)
+        })
 
 //Retrieve data about the dimension & measure(s)
 export const getData = data =>
@@ -21,4 +24,6 @@ export const getData = data =>
         },
         body: JSON.stringify({ ...data }) })
             .then(res => res.json())
-            // .then(response => response.data)
+            .catch(error => {
+                console.log("Error fetching data: ", error)
+            })

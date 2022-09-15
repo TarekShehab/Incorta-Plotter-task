@@ -50,7 +50,7 @@ class Plotter extends Component {
         }
         await API.getData(data)
             .then(res => {
-                console.log("Retrieved data: ", res)
+                // console.log("Retrieved data: ", res)
                 this.setState({data: res})
             })
     }
@@ -77,7 +77,7 @@ class Plotter extends Component {
             }
         }
         
-        console.log("Plot data: ", plotData)
+        // console.log("Plot data: ", plotData)
         return plotData
     }
 
@@ -87,7 +87,7 @@ class Plotter extends Component {
     }
 
     render() {
-        console.log("State data: ", this.state.data)
+        // console.log("State data: ", this.state.data)
         return (
             <div className="plotter">
                 <button onClick={this.buildPlotData}> </button>

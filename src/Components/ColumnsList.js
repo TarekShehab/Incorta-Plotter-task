@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import * as API from '../API.js'
-import DraggableButton from "./DraggableButton.js"
+import DraggableButton from "./dragndrop/DraggableButton.js"
 
 class ColumnsList extends Component {
 
@@ -11,7 +11,7 @@ class ColumnsList extends Component {
     getColumns = async () => {
         await API.getAll()
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 this.setState({columns: res})
             })
     }
@@ -25,7 +25,7 @@ class ColumnsList extends Component {
         return (
             <div className="col1">
                     
-                <h2>Columns</h2>
+                <h2>- Columns -</h2>
                 <ul>
                     <h3>Dimensions:</h3>
                     {
@@ -33,7 +33,7 @@ class ColumnsList extends Component {
                             return(
                                 <li key={col.name} >
                                     {/* <button > {col.name} </button> */}
-                                    <DraggableButton id={col.name} name={col.name} />
+                                    <DraggableButton id={col.name} name={col.name} type="dimension-button" />
                                 </li>
                             )
                         })
@@ -45,7 +45,7 @@ class ColumnsList extends Component {
                             return(
                                 <li key={col.name} >
                                     {/* <button > {col.name} </button> */}
-                                    <DraggableButton id={col.name} name={col.name} />
+                                    <DraggableButton id={col.name} name={col.name} type="measure-button" />
                                 </li>
                             )
                         })
