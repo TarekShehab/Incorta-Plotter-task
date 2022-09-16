@@ -57,24 +57,29 @@ body {
   width: 80%;
   height: 2rem;
   margin-left: 2rem;
+  margin-bottom: .5rem;
   display: flex;
   flex-direction: row;
+  align-content: space-around;
+  position: relative; /*heree*/
+
 }
 
 .drop p{
   margin: .25rem 0rem 0rem 2rem;
 }
 
-.drop button{
+#clear-button{
   background-color: aliceblue;
-  margin: 0rem .5rem .5rem 2rem;
-  border: 4px;
-  border-radius: 10%;
-}
-
-.drop button:hover{
-  text-decoration: underline;
-  border-radius: 0;
+  margin: .28rem .5rem .5rem 2rem;
+  position: absolute;
+  right: 5px;
+  border-radius: 10px;
+  border-color: rgb(210, 215, 215);
+  /* border-style: groove; */
+  /* border-left: 4px; */
+  /* bottom: 1%; */
+  /* bottom: 1.8rem; */
 }
 
 #tag{
@@ -82,7 +87,7 @@ body {
   margin: 5px 2px;
   border-style:dotted;
   border: 5px;
-  border-radius: 10%;
+  border-radius: 5px;
   border-color: black ;
 }
 

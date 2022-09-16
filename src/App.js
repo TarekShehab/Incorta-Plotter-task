@@ -69,7 +69,7 @@ class App extends Component {
 
   componentDidMount = () => {
     this.getColumns()
-      .then(this.getQueryData("Product", ["Cost", "Revenue"]))
+      // .then(this.getQueryData("Product", ["Cost", "Revenue", "Units sold"]))
         // .then(this.buildPlotData())
     // console.log(this.buildPlotData())
   }

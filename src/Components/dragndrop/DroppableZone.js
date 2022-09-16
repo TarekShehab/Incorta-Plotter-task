@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import { useDrop } from "react-dnd"
 import DraggableButton from "./DraggableButton.js"
 
@@ -30,8 +30,9 @@ const columns = [
     }
 ]
 
-function DroppableZone({type}) {
+function DroppableZone({type, setDimension, setMeasures}) {
     
+    let uniqueDropBoard
     const [dropBoard, setBoard] = useState([])
     const [{isOver}, drop] =  useDrop(() => ({
         accept: type,
@@ -49,34 +50,38 @@ function DroppableZone({type}) {
         const tagsList = columns.filter(col => col.name === name)
         setBoard(board => [...board, tagsList[0]])
         showDrag()
-        console.log(`droppable zone of type: ${type} has a list: ${dropBoard}`)
+        //Set Dimension & Measures accordingly
+        type === "dimension-button" ? setDimension(name) : setMeasures(board => [...board, tagsList[0]])
     }
 
     const clearBoard = () => {
         setBoard([])
-        console.log(Array.from(new Set(dropBoard)))
+        // console.log(Array.from(new Set(dropBoard)))
+    }
+    
+    // Only first dimension added it applied
+    if(type === "dimension-button" && dropBoard.length > 1){
+        setBoard(board => [board[0]])
     }
 
     // Remove duplicates
-    let uniqueDropBoard = [...new Set(dropBoard)]
+    uniqueDropBoard = [...new Set(dropBoard)]
 
-    // if(type === "dimension-button"){
-    //     setBoard(board => [board[0]])
-    // }   
+    // console.log("DropBoard: ", dropBoard)
 
     return(
         <div className="drop">
             { type === "dimension-button" ? <p>Dimension:</p> : <p>Measure:</p> }
 
-            <div ref={drop}>
+            <div ref={drop} id="tags-container">
                 {
                     uniqueDropBoard.map(column => {
                         return <DraggableButton key={column.name} id={column.name} name={column.name} type={type} />
                     })    
                 }
+            <button onClick={clearBoard} id="clear-button">⨉ Clear</button>
             </div>
 
-            <button onClick={clearBoard}>⨉ Clear</button>
         </div>
     )
 }
