@@ -14,7 +14,8 @@ function DraggableButton({id, name, type}) {
     return(
         <button 
             ref={drag}
-            style={{border: isDragging ? "2px solid black" : "0px" }}
+            style={{border: isDragging ? "1px solid black" : "0px" }}
+            id="tag"
         > {name} </button>
     )
 }

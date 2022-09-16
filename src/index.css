@@ -20,11 +20,10 @@ body {
 
 /* Columns Container */
 .col1{
-  /* text-align: center; */
   flex: 1;
   justify-content: center;
   background-color: aliceblue;
-  margin-top: 1rem;
+  margin-top: .25rem;
   margin-left: 2rem;
   border-style: groove;
 }
@@ -34,7 +33,6 @@ body {
 }
 
 .col1 h3{
-  /* padding-left: .5em; */
   margin-bottom: 0;
 }
 
@@ -48,52 +46,30 @@ body {
   margin-left: .5rem;
 }
 
+/* Picker & Plotter container */
 .col2{
   flex: 4;
 }
 
-.plotter{
-  width: 80%;
-  background-color: aliceblue;
-  margin-top: 1rem;
-  margin-left: 2rem;
-  border-style: groove;
-  size: initial;
-  text-align: center;
-}
-
-/* .picker{
-  display: flex;
-  flex-direction: column;
-} */
-
-.drop div{
+.drop div{ /*Tags Container */
   background-color: aliceblue;
   border-style: groove;
   width: 80%;
   height: 2rem;
   margin-left: 2rem;
-  /* text-align: end;; */
   display: flex;
   flex-direction: row;
 }
 
 .drop p{
-  margin: 1rem 0rem 0rem 2rem;
-  /* text-align: right; */
-  /* margin-top: 5px; */
-  /* padding-right: 10px; */
+  margin: .25rem 0rem 0rem 2rem;
 }
 
 .drop button{
   background-color: aliceblue;
   margin: 0rem .5rem .5rem 2rem;
-  /* border-style: groove; */
   border: 4px;
   border-radius: 10%;
-  /* text-align: right; */
-  /* position: fixed;
-  justify-content: right; */
 }
 
 .drop button:hover{
@@ -101,15 +77,25 @@ body {
   border-radius: 0;
 }
 
-/*
-.draggable{
-  text-align: center;
+#tag{
+  background-color: rgb(210, 215, 215);
+  margin: 5px 2px;
+  border-style:dotted;
+  border: 5px;
+  border-radius: 10%;
+  border-color: black ;
 }
 
- .droppable{
+#tag:hover{
+  text-decoration: none;
+}
+
+.plotter{
+  width: 80%;
   background-color: aliceblue;
+  margin-top: 0;
+  margin-left: 2rem;
   border-style: groove;
-  width: 60%;
-  height: 2rem;
-  margin: 2rem .5rem .5rem 2rem;
-} */
+  size: initial;
+  text-align: center;
+}

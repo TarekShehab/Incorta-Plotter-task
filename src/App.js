@@ -81,7 +81,7 @@ class App extends Component {
           <ColumnsList columns={this.state.columns} />
           <div className='col2 col-flex'>
             <Picker />
-            <Plotter buildPlotData={this.buildPlotData}
+            <Plotter plotData={this.state.plotData}
             />
           </div>
         </div>
