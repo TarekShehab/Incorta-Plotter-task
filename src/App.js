@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from "react-dnd-html5-backend"
-// import './App.css'
 import ColumnsList from './Components/ColumnsList.js'
 import Plotter from './Components/Plotter.js'
 import Picker from './Components/Picker.js'
@@ -15,7 +14,7 @@ class App extends Component {
     plotData: []
   }
 
-  //Fetch all columns from API & update state with it
+  //Fetch all columns from API & update state
   getColumns = async () => {
     await API.getAll()
       .then(res => {
@@ -24,7 +23,7 @@ class App extends Component {
       })
   }
 
-  // Fetch Query response from API & update state with it
+  // Fetch Query response from API & update state
   getQueryData = async (dimension, measures) => {
     const data = 
     {
@@ -38,6 +37,7 @@ class App extends Component {
       })
   }
 
+  // Buil data that will be passed to the plotter to draw the line chart & update state
   buildPlotData = () => {
     let data = this.state.queryResponse
     let plotData
@@ -51,8 +51,7 @@ class App extends Component {
       })
 
       // Write the values of each measure
-      //remove first element (dimension) to get an array of measures
-      data.shift()
+      data.shift() //remove first element (dimension) to get an array of measures
       for(let i=0 ; i<data.length ; i++){
         const measure = data[i].name
         for(let j=0 ; j<plotData.length ; j++){
@@ -65,12 +64,13 @@ class App extends Component {
     }
     
     console.log("Plot data: ", plotData)
-    return plotData
+    this.setState({plotData: plotData})
   }
 
   componentDidMount = () => {
     this.getColumns()
-    this.getQueryData("Product", ["Cost", "Revenue"])
+      .then(this.getQueryData("Product", ["Cost", "Revenue"]))
+        // .then(this.buildPlotData())
     // console.log(this.buildPlotData())
   }
 
@@ -81,8 +81,7 @@ class App extends Component {
           <ColumnsList columns={this.state.columns} />
           <div className='col2 col-flex'>
             <Picker />
-            <Plotter 
-              buildPlotData={this.buildPlotData}
+            <Plotter buildPlotData={this.buildPlotData}
             />
           </div>
         </div>

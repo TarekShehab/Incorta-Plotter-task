@@ -88,9 +88,17 @@ body {
 .drop button{
   background-color: aliceblue;
   margin: 0rem .5rem .5rem 2rem;
+  /* border-style: groove; */
+  border: 4px;
+  border-radius: 10%;
   /* text-align: right; */
   /* position: fixed;
   justify-content: right; */
+}
+
+.drop button:hover{
+  text-decoration: underline;
+  border-radius: 0;
 }
 
 /*

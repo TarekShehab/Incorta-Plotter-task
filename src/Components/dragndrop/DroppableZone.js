@@ -50,7 +50,6 @@ function DroppableZone({type}) {
         setBoard(board => [...board, tagsList[0]])
         showDrag()
         console.log(`droppable zone of type: ${type} has a list: ${dropBoard}`)
-
     }
 
     const clearBoard = () => {
@@ -60,21 +59,24 @@ function DroppableZone({type}) {
 
     // Remove duplicates
     let uniqueDropBoard = [...new Set(dropBoard)]
-    // setBoard(Array.from(uniqueDropBoard))
+
+    // if(type === "dimension-button"){
+    //     setBoard(board => [board[0]])
+    // }   
 
     return(
         <div className="drop">
-            {type==="dimension-button" ? <p>Dimension:</p> : <p>Measure:</p> }
+            { type === "dimension-button" ? <p>Dimension:</p> : <p>Measure:</p> }
+
             <div ref={drop}>
                 {
                     uniqueDropBoard.map(column => {
-                        return <DraggableButton key={column.name} id={column.name} name={column.name}  type={type} />
+                        return <DraggableButton key={column.name} id={column.name} name={column.name} type={type} />
                     })    
                 }
             </div>
-            <button onClick={clearBoard}>✖</button>
 
-            
+            <button onClick={clearBoard}>⨉ Clear</button>
         </div>
     )
 }
