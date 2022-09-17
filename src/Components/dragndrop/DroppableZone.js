@@ -42,25 +42,25 @@ function DroppableZone({type, setDimension, setMeasures}) {
         })
     })) 
 
-    const showDrag = () =>{
-        console.log(isOver)
-    }
+    // const showDrag = () =>{
+    //     console.log(isOver)
+    // }
 
     const addcolumnTag = name => {
         const tagsList = columns.filter(col => col.name === name)
         setBoard(board => [...board, tagsList[0]])
-        showDrag()
-        //Set Dimension & Measures accordingly
-        type === "dimension-button" ? setDimension(name) : setMeasures(board => [...board, tagsList[0]])
+        //Set Dimension & Measures accordingly (removing duplicate additions by using Set object)
+        type === "dimension" ? setDimension(name) : setMeasures(measures => Array.from(new Set([...measures, tagsList[0].name])))
     }
 
     const clearBoard = () => {
         setBoard([])
+        type === "dimension" ? setDimension("") : setMeasures([])
         // console.log(Array.from(new Set(dropBoard)))
     }
     
     // Only first dimension added it applied
-    if(type === "dimension-button" && dropBoard.length > 1){
+    if(type === "dimension" && dropBoard.length > 1){
         setBoard(board => [board[0]])
     }
 
@@ -71,7 +71,7 @@ function DroppableZone({type, setDimension, setMeasures}) {
 
     return(
         <div className="drop">
-            { type === "dimension-button" ? <p>Dimension:</p> : <p>Measure:</p> }
+            { type === "dimension" ? <p>Dimension:</p> : <p>Measure:</p> }
 
             <div ref={drop} id="tags-container">
                 {
@@ -79,7 +79,7 @@ function DroppableZone({type, setDimension, setMeasures}) {
                         return <DraggableButton key={column.name} id={column.name} name={column.name} type={type} />
                     })    
                 }
-            <button onClick={clearBoard} id="clear-button">⨉ Clear</button>
+                <button onClick={clearBoard} id="clear-button">⨉ Clear</button>
             </div>
 
         </div>

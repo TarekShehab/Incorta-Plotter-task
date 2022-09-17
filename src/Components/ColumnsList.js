@@ -13,7 +13,7 @@ function ColumnsList ({columns}) {
                     columns.filter(c => c.function === 'dimension').map(col => {
                         return(
                             <li key={col.name} >
-                                <DraggableButton id={col.name} name={col.name} type="dimension-button" />
+                                <DraggableButton id={col.name} name={col.name} type="dimension" />
                             </li>
                         )
                     })
@@ -24,7 +24,7 @@ function ColumnsList ({columns}) {
                     columns.filter(c => c.function === 'measure').map(col => {
                         return(
                             <li key={col.name} >
-                                <DraggableButton id={col.name} name={col.name} type="measure-button" />
+                                <DraggableButton id={col.name} name={col.name} type="measure" />
                             </li>
                         )
                     })

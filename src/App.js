@@ -10,6 +10,8 @@ class App extends Component {
 
   state={
     columns:[],
+    queryDimension: "",
+    queryMeasures: [],
     queryResponse: [],
     plotData: []
   }
@@ -67,6 +69,12 @@ class App extends Component {
     this.setState({plotData: plotData})
   }
 
+  // setQuery = (dimension, measures) => {
+  //   this.setState({queryDimension: dimension})
+  //   this.setState({queryMeasures: measures})
+    
+  // }
+
   componentDidMount = () => {
     this.getColumns()
       // .then(this.getQueryData("Product", ["Cost", "Revenue", "Units sold"]))
@@ -80,7 +88,7 @@ class App extends Component {
         <div className='row-flex'>
           <ColumnsList columns={this.state.columns} />
           <div className='col2 col-flex'>
-            <Picker />
+            <Picker getQueryData={this.getQueryData} />
             <Plotter plotData={this.state.plotData}
             />
           </div>
