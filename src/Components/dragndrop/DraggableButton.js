@@ -5,7 +5,7 @@ function DraggableButton({id, name, type}) {
 
     const [{isDragging}, drag] = useDrag(() => ({
         type: type,
-        item: {id: id},
+        item: {id: name},
         collect: monitor => ({
             isDragging: !!monitor.isDragging()
         })

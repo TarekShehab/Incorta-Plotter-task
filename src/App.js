@@ -16,6 +16,10 @@ class App extends Component {
     plotData: []
   }
 
+  clearResponse = () => {
+    this.setState({queryResponse: []})
+  }
+
   //Fetch all columns from API & update state
   getColumns = async () => {
     await API.getAll()
@@ -77,9 +81,12 @@ class App extends Component {
 
   componentDidMount = () => {
     this.getColumns()
-      // .then(this.getQueryData("Product", ["Cost", "Revenue", "Units sold"]))
-        // .then(this.buildPlotData())
-    // console.log(this.buildPlotData())
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if(prevState.queryResponse !== this.state.queryResponse){
+      this.buildPlotData()
+    }
   }
 
   render() {
@@ -88,7 +95,7 @@ class App extends Component {
         <div className='row-flex'>
           <ColumnsList columns={this.state.columns} />
           <div className='col2 col-flex'>
-            <Picker getQueryData={this.getQueryData} />
+            <Picker getQueryData={this.getQueryData} clearPlotData={() => this.setState({plotData: []})} />
             <Plotter plotData={this.state.plotData}
             />
           </div>

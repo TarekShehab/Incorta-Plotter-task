@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { useDrop } from "react-dnd"
 import DraggableButton from "./DraggableButton.js"
 
+const DIMENSION = "dimension"
+// const MEASURE = "measure"
 
 const columns = [
     {
@@ -30,7 +32,7 @@ const columns = [
     }
 ]
 
-function DroppableZone({type, setDimension, setMeasures}) {
+function DroppableZone({type, dimension, setDimension, setMeasures, clearPlotData}) {
     
     let uniqueDropBoard
     const [dropBoard, setBoard] = useState([])
@@ -42,41 +44,41 @@ function DroppableZone({type, setDimension, setMeasures}) {
         })
     })) 
 
-    // const showDrag = () =>{
-    //     console.log(isOver)
-    // }
-
     const addcolumnTag = name => {
         const tagsList = columns.filter(col => col.name === name)
         setBoard(board => [...board, tagsList[0]])
         //Set Dimension & Measures accordingly (removing duplicate additions by using Set object)
-        type === "dimension" ? setDimension(name) : setMeasures(measures => Array.from(new Set([...measures, tagsList[0].name])))
+        if(type === DIMENSION) {
+            if(dimension.length === 0)
+                setDimension(name)
+        }else{
+            setMeasures(measures => Array.from(new Set([...measures, tagsList[0].name])))
+        }
     }
 
+    
     const clearBoard = () => {
         setBoard([])
-        type === "dimension" ? setDimension("") : setMeasures([])
-        // console.log(Array.from(new Set(dropBoard)))
+        type === DIMENSION ? setDimension("") : setMeasures([])
+        clearPlotData()
     }
     
-    // Only first dimension added it applied
-    if(type === "dimension" && dropBoard.length > 1){
-        setBoard(board => [board[0]])
+    // Last Added Dimension Applies
+    if(type === DIMENSION && dropBoard.length > 1){
+        setBoard(board => [board[board.length-1]])
     }
 
     // Remove duplicates
     uniqueDropBoard = [...new Set(dropBoard)]
 
-    // console.log("DropBoard: ", dropBoard)
-
     return(
         <div className="drop">
-            { type === "dimension" ? <p>Dimension:</p> : <p>Measure:</p> }
+            { type === DIMENSION ? <p>Dimension:</p> : <p>Measure:</p> }
 
             <div ref={drop} id="tags-container">
                 {
                     uniqueDropBoard.map(column => {
-                        return <DraggableButton key={column.name} id={column.name} name={column.name} type={type} />
+                        return <DraggableButton key={column.name} name={column.name} type={type} />
                     })    
                 }
                 <button onClick={clearBoard} id="clear-button">⨉ Clear</button>

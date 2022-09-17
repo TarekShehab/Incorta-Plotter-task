@@ -1,6 +1,9 @@
 import React from "react"
 import DraggableButton from "./dragndrop/DraggableButton.js"
 
+const DIMENSION = "dimension"
+const MEASURE = "measure"
+
 function ColumnsList ({columns}) {
 
     return (
@@ -13,7 +16,7 @@ function ColumnsList ({columns}) {
                     columns.filter(c => c.function === 'dimension').map(col => {
                         return(
                             <li key={col.name} >
-                                <DraggableButton id={col.name} name={col.name} type="dimension" />
+                                <DraggableButton name={col.name} type={DIMENSION} />
                             </li>
                         )
                     })
@@ -24,7 +27,7 @@ function ColumnsList ({columns}) {
                     columns.filter(c => c.function === 'measure').map(col => {
                         return(
                             <li key={col.name} >
-                                <DraggableButton id={col.name} name={col.name} type="measure" />
+                                <DraggableButton name={col.name} type={MEASURE} />
                             </li>
                         )
                     })
