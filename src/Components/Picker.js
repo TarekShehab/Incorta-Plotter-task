@@ -20,7 +20,7 @@ function Picker({getQueryData, clearPlotData}) {
         <div className="picker">
 
             <DroppableZone type="dimension" dimension={dimension} setDimension={setDimension}  clearPlotData={clearPlotData} />
-            <DroppableZone type="measure" setMeasures={setMeasures} clearPlotData={clearPlotData} />
+            <DroppableZone type="measure" measures={measures} setMeasures={setMeasures} clearPlotData={clearPlotData} />
             
         </div>
     )

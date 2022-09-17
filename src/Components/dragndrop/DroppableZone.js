@@ -1,9 +1,9 @@
-import React, { useState } from "react"
+import React from "react"
 import { useDrop } from "react-dnd"
 import DraggableButton from "./DraggableButton.js"
 
 const DIMENSION = "dimension"
-// const MEASURE = "measure"
+const MEASURE = "measure"
 
 const columns = [
     {
@@ -32,10 +32,9 @@ const columns = [
     }
 ]
 
-function DroppableZone({type, dimension, setDimension, setMeasures, clearPlotData}) {
+function DroppableZone({type, dimension, measures, setDimension, setMeasures, clearPlotData}) {
     
     let uniqueDropBoard
-    const [dropBoard, setBoard] = useState([])
     const [{isOver}, drop] =  useDrop(() => ({
         accept: type,
         drop: item => addcolumnTag(item.id),
@@ -46,7 +45,7 @@ function DroppableZone({type, dimension, setDimension, setMeasures, clearPlotDat
 
     const addcolumnTag = name => {
         const tagsList = columns.filter(col => col.name === name)
-        setBoard(board => [...board, tagsList[0]])
+        
         //Set Dimension & Measures accordingly (removing duplicate additions by using Set object)
         if(type === DIMENSION) {
             if(dimension.length === 0)
@@ -56,30 +55,31 @@ function DroppableZone({type, dimension, setDimension, setMeasures, clearPlotDat
         }
     }
 
-    
     const clearBoard = () => {
-        setBoard([])
         type === DIMENSION ? setDimension("") : setMeasures([])
         clearPlotData()
     }
-    
-    // Last Added Dimension Applies
-    if(type === DIMENSION && dropBoard.length > 1){
-        setBoard(board => [board[board.length-1]])
+
+    switch(type){
+        case DIMENSION : 
+            dimension !== '' ? uniqueDropBoard = [dimension] : uniqueDropBoard = []
+            break
+        case MEASURE : 
+            uniqueDropBoard = [...new Set(measures)]
+            break
+        default :
+            break
     }
-
-    // Remove duplicates
-    uniqueDropBoard = [...new Set(dropBoard)]
-
+    
     return(
         <div className="drop">
             { type === DIMENSION ? <p>Dimension:</p> : <p>Measure:</p> }
 
             <div ref={drop} id="tags-container">
                 {
-                    uniqueDropBoard.map(column => {
-                        return <DraggableButton key={column.name} name={column.name} type={type} />
-                    })    
+                    (uniqueDropBoard.map(column => {
+                        return <DraggableButton key={column} name={column} type={type} />
+                    }))    
                 }
                 <button onClick={clearBoard} id="clear-button">⨉ Clear</button>
             </div>
