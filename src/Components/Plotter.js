@@ -1,52 +1,21 @@
 import React from "react"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
-
-
 function Plotter({plotData}) {
-
-    // let data
     
-    // plotData !== [] 
-    // ? data=plotData 
-    // : data=[
-    //         {
-    //             "name": "17\" LCD w/built-in HDTV Tuner",
-    //             "Cost": 584207.400000002,
-    //             "Revenue": 1256523.879999999,
-    //             "Units Sold": 980
-    //         },
-    //         {
-    //             "name": "Mini DV Camcorder with 3.5\" Swivel LCD",
-    //             "Cost": 1880407.440000024,
-    //             "Revenue": 4303905.360000013,
-    //             "Units Sold": 3064
-    //         },
-    //         {
-    //             "name": "Envoy Ambassador",
-    //             "Cost": 7531491.899999776,
-    //             "Revenue": 14439514.229999809,
-    //             "Units Sold": 4000000
-    //         },
-    //         {
-    //             "name": "Model CD13272 Tricolor Ink Cartridge",
-    //             "Cost": 3861.4400000000046,
-    //             "Revenue": 223194.63999999984,
-    //             "Units Sold": 176
-    //         },
-    //         {
-    //             "name": "5MP Telephoto Digital Camera",
-    //             "Cost": 8910.88,
-    //             "Revenue": 20004,
-    //             "Units Sold": 16
-    //         },
-    //         {
-    //             "name": "f256MB Memory Card",
-    //             "Cost": 351.76,
-    //             "Revenue": 11063.36,
-    //             "Units Sold": 8
-    //         }
-    //      ]
+    let measures = []
+
+    // Determine the measures that are in the current data that needs to be plotted
+    const findMeasures = () => {
+        if(plotData.length !== 0){
+            for (const pair of Object.entries(plotData[0])){
+                if(pair[0] !== "name"){
+                    measures.push(pair[0])
+                }
+            }
+        }
+    }
+    findMeasures()
 
     // Formats the values of the Y-Axis ticks (1,000 => K & 1,000,000 => M)
     const formatYAxis = val => {
@@ -69,9 +38,34 @@ function Plotter({plotData}) {
         return ""
     } 
     
+    // Format the data that shows when hovering on a data point
+    const formatToolTip = (val, name) => {
+        val =  Math.round(val)
+        if (val >=10000 && val<=999999){
+            val = (val/1000).toFixed(2)
+            val += "K "
+        }
+        
+        if (val >=1000000){
+            val = (val/1000000).toFixed(2)
+            val += "M "
+        }
+        if(name !== "Units sold"){
+            val = val + "$"
+        }
+        return val
+    }
+
+    // Format toolTip label
+    const formatLabel = name => {
+        name = "- " + name + " -"
+        return name
+
+    }
+
+    
     return (
         <div className="plotter">
-            {/* <button onClick={buildPlotData}> </button> */}
             <ResponsiveContainer width="70%" aspect={1}>
             <LineChart
                 width={500}
@@ -90,17 +84,17 @@ function Plotter({plotData}) {
                     tickFormatter={formatXAxis} 
                     angle={45} 
                     tickCount={6} 
-                    tick={{fontSize: 10}} 
+                    tick={{fontSize: 15}} 
                 />
                 <YAxis 
                     tickFormatter={formatYAxis} 
-                    tick={{fontSize: 10}} 
+                    tick={{fontSize: 15}} 
                 />
-                <Tooltip />
-                <Legend/>
-                <Line type="monotone" dataKey="Cost" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="Revenue" stroke="#82ca9d" />
-                <Line type="monotone" dataKey="Units sold" stroke="#FF3131" />
+                <Tooltip formatter={formatToolTip} labelFormatter={formatLabel} />
+                <Legend />
+                { (measures.includes("Cost")) && (<Line type="linear" dataKey="Cost" stroke="#8884d8" activeDot={{ r: 8 }} />) }
+                { (measures.includes("Revenue")) && (<Line type="linear" dataKey="Revenue" stroke="#82ca9d" />) }
+                { (measures.includes("Units sold")) && (<Line type="linear" dataKey="Units sold" stroke="#FF3131" />) }
             </LineChart>
             </ResponsiveContainer>
         </div>

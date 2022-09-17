@@ -1,11 +1,15 @@
 body {
   background-color: rgb(210, 215, 215);
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.2rem; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+button{
+  font-family: 'DynaPuff', cursive;
+  font-size: 1rem;
 }
 
 .row-flex{
@@ -26,6 +30,7 @@ body {
   margin-top: .25rem;
   margin-left: 2rem;
   border-style: groove;
+  border-radius: 5px;
 }
 
 .col1 h2{
@@ -48,12 +53,14 @@ body {
 
 /* Picker & Plotter container */
 .col2{
-  flex: 4;
+  flex: 3;
+  width: 200px;
 }
 
 .drop div{ /*Tags Container */
   background-color: aliceblue;
   border-style: groove;
+  border-radius: 5px;
   width: 80%;
   height: 2rem;
   margin-left: 2rem;
@@ -61,7 +68,7 @@ body {
   display: flex;
   flex-direction: row;
   align-content: space-around;
-  position: relative; /*heree*/
+  position: relative; 
 
 }
 
@@ -70,16 +77,13 @@ body {
 }
 
 #clear-button{
+  font-size: .8rem;
   background-color: aliceblue;
   margin: .28rem .5rem .5rem 2rem;
   position: absolute;
   right: 5px;
   border-radius: 10px;
   border-color: rgb(210, 215, 215);
-  /* border-style: groove; */
-  /* border-left: 4px; */
-  /* bottom: 1%; */
-  /* bottom: 1.8rem; */
 }
 
 #tag{
@@ -101,6 +105,7 @@ body {
   margin-top: 0;
   margin-left: 2rem;
   border-style: groove;
+  border-radius: 5px;
   size: initial;
   text-align: center;
 }

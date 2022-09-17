@@ -10,12 +10,11 @@ class App extends Component {
 
   state={
     columns:[],
-    queryDimension: "",
-    queryMeasures: [],
     queryResponse: [],
     plotData: []
   }
 
+  // Clear the state variable: queryResponse
   clearResponse = () => {
     this.setState({queryResponse: []})
   }
@@ -23,10 +22,7 @@ class App extends Component {
   //Fetch all columns from API & update state
   getColumns = async () => {
     await API.getAll()
-      .then(res => {
-        // console.log(res)
-        this.setState({columns: res})
-      })
+      .then(res => this.setState({columns: res}))
   }
 
   // Fetch Query response from API & update state
@@ -37,10 +33,7 @@ class App extends Component {
       "measures": measures
     }
     await API.getData(data)
-      .then(res => {
-        console.log("Retrieved data: ", res)
-        this.setState({queryResponse: res})
-      })
+      .then(res => this.setState({queryResponse: res}))
   }
 
   // Buil data that will be passed to the plotter to draw the line chart & update state
@@ -73,12 +66,6 @@ class App extends Component {
     this.setState({plotData: plotData})
   }
 
-  // setQuery = (dimension, measures) => {
-  //   this.setState({queryDimension: dimension})
-  //   this.setState({queryMeasures: measures})
-    
-  // }
-
   componentDidMount = () => {
     this.getColumns()
   }
@@ -92,14 +79,22 @@ class App extends Component {
   render() {
     return (
       <DndProvider backend={HTML5Backend}>
+
         <div className='row-flex'>
-          <ColumnsList columns={this.state.columns} />
+          <ColumnsList 
+            columns={this.state.columns}
+          />
           <div className='col2 col-flex'>
-            <Picker getQueryData={this.getQueryData} clearPlotData={() => this.setState({plotData: []})} />
-            <Plotter plotData={this.state.plotData}
+            <Picker 
+              getQueryData={this.getQueryData} 
+              clearPlotData={() => this.setState({plotData: []})} 
+            />
+            <Plotter 
+              plotData={this.state.plotData}
             />
           </div>
         </div>
+
       </DndProvider>
     )
   }

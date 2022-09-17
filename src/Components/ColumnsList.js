@@ -1,6 +1,7 @@
 import React from "react"
 import DraggableButton from "./dragndrop/DraggableButton.js"
 
+// Avoiding misspelling
 const DIMENSION = "dimension"
 const MEASURE = "measure"
 

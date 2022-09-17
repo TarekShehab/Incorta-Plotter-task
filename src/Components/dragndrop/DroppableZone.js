@@ -2,38 +2,13 @@ import React from "react"
 import { useDrop } from "react-dnd"
 import DraggableButton from "./DraggableButton.js"
 
+// Avoiding misspelling
+const COLUMNS = ["Product", "Year", "Country", "Cost", "Revenue", "Units sold"]
 const DIMENSION = "dimension"
 const MEASURE = "measure"
 
-const columns = [
-    {
-        "name": "Product",
-        "function": "dimension"
-    },
-    {
-        "name": "Year",
-        "function": "dimension"
-    },
-    {
-        "name": "Country",
-        "function": "dimension"
-    },
-    {
-        "name": "Cost",
-        "function": "measure"
-    },
-    {
-        "name": "Revenue",
-        "function": "measure"
-    },
-    {
-        "name": "Units sold",
-        "function": "measure"
-    }
-]
-
 function DroppableZone({type, dimension, measures, setDimension, setMeasures, clearPlotData}) {
-    
+
     let uniqueDropBoard
     const [{isOver}, drop] =  useDrop(() => ({
         accept: type,
@@ -44,14 +19,14 @@ function DroppableZone({type, dimension, measures, setDimension, setMeasures, cl
     })) 
 
     const addcolumnTag = name => {
-        const tagsList = columns.filter(col => col.name === name)
+        const tagsList = COLUMNS.filter(col => col === name)
         
         //Set Dimension & Measures accordingly (removing duplicate additions by using Set object)
         if(type === DIMENSION) {
             if(dimension.length === 0)
                 setDimension(name)
         }else{
-            setMeasures(measures => Array.from(new Set([...measures, tagsList[0].name])))
+            setMeasures(measures => Array.from(new Set([...measures, tagsList[0]])))
         }
     }
 
@@ -73,7 +48,7 @@ function DroppableZone({type, dimension, measures, setDimension, setMeasures, cl
     
     return(
         <div className="drop">
-            { type === DIMENSION ? <p>Dimension:</p> : <p>Measure:</p> }
+            { type === DIMENSION ? <p>Dimension:</p> : <p>Measure(s):</p> }
 
             <div ref={drop} id="tags-container">
                 {
